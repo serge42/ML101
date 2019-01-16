@@ -1,0 +1,36 @@
+\documentclass[unicode,11pt,a4paper,oneside,numbers=endperiod,openany]{scrartcl}
+
+\usepackage{assignment}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+%\usepackage{mathbbol}
+\usepackage{mdsymbol}
+
+\newcommand{\punkte}[1]{\hspace{1ex}\emph{\mdseries\hfill(#1~\ifcase#1{Points}\or{Points}\else{Points}\fi)}}
+
+\begin{document}
+
+\setassignment
+\setduedate{2/11 2018, 21:00pm}
+
+\serieheader{Machine Learning}{2018}{Student: Sébastien Bouquet}{}{Solution for Assignment 2}{}
+\newline
+
+
+\section{Theoretical Probability \punkte{5}}
+\begin{enumerate}
+\item For P(X) to be a density function, it is necessary that 
+$ \int x dx $
+\end{enumerate}
+
+
+\section{Simple Machine Learning Framework  \punkte{45}}
+\label{sec:2}
+I implemented most of the framework but the weight updates seems wrong because the weights only change a little bit in the beginning and then remain constant. \\
+The gradient may also not be correct because I was unable to implement the \textit{check\_gradient} function correctly.
+
+
+\section{Handwritten Digit Recognition  \punkte{35}}
+Unfortunately, I could not even start this exercise since Section \ref{sec:2} was not finished.
+
+\end{document}

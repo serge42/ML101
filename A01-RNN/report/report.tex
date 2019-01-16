@@ -1,0 +1,62 @@
+\documentclass[unicode,11pt,a4paper,oneside,numbers=endperiod,openany]{scrartcl}
+
+\usepackage{assignment}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{mathbbol}
+
+\newcommand{\punkte}[1]{\hspace{1ex}\emph{\mdseries\hfill(#1~\ifcase#1{Points}\or{Points}\else{Points}\fi)}}
+
+\begin{document}
+
+\setassignment
+\setduedate{19/10 2018, 09:00pm}
+
+\serieheader{Machine Learning}{2018}{Student: Sébastien Bouquet}{}{Solution for Assignment 1}{}
+\newline
+
+
+\section{The Perceptron \punkte{20}}
+\begin{enumerate}
+\item 
+$\bar{y} = \sum_j\bar{x}_j w_j + \bar{b}$ 
+where $\bar{b}=(w_{k+1}, w_{k+1}, ..., w_{k+1})^T, \bar{y},\bar{x_j},\bar{b} \in \mathbb{R}^n, 
+\bar{w} \in \mathbb{R}^{k+1}$. \\
+$\bar{y} = \bar{w}\mathbf{A}$ where 
+$\mathbf{A} = (\bar{x_1}, \bar{x_2}, ..., \bar{x_k}, \mathbb{1}), \mathbb{1} = (1, 1, ..., 1, 1)^T, 
+\mathbb{1} \in \mathbb{R}^n, \mathbf{A} \in \mathbb{R}^{n \times k+1}$.
+
+\item Unvectorized: $E = \frac{1}{2}\sum_j (\bar{y}_j - \bar{t}_j)^2 $. $\leftarrow$ \textbf{WRONG} \\
+$$E = \frac{1}{2}\frac{\sum_j (\bar{y}_j - \bar{t}_j)^2}{n}$$.
+
+\item $$\frac{\partial{E}}{\partial{w_i}} 
+= \frac{\partial{\frac{1}{2}[(\bar{y}_1-\bar{t}_1)^2+(\bar{y}_2-\bar{t}_2)^2}+ ... +(\bar{y}_n-\bar{t}_n)^2]}{\partial{w_i}} 
+= [(\bar{y}_1 - \bar{t}_1)+(\bar{y}_2-\bar{t}_2)+...+(\bar{y}_n-\bar{t}_n)] \frac{\partial{\bar{y}}}{\partial{w_i}}$$ \\
+$$= \mathbf{\frac{1}{n}} \sum_{j=1}^n (\bar{y}_j - \bar{t}_j)\bar{x}_j$$.
+
+\item $$w_i^{new} = w_i^{old} - \Delta w_i,  ~\text{where}~
+\Delta w_i = \eta \mathbf{\frac{1}{n}} \sum_j (\bar{y}_j - \bar{t}_j) \bar{x}_j$$. \\%\frac{\partial{\bar{y}}}{w_i}$. \\
+\textit{Why can it be used as a learning algorithm ? }\\
+It does update the weights of the inputs compared to the targets by following the gradient which means it should reduce the error at each step. \\
+The main problem is that the weights cannot modify only a subset of their corresponding input vectors. So the whole input vector will be modified even if only a few subset of its elements are responsible for the error. (\textbf{WRONG}) \\
+\textit{Main problem is that the gradient descent is guaranteed to converge but might converge on a local minimal instead of global minima.}
+\item $\bar{w}^{new} \approx [-0.110, -0.309, 0.190, 2]$ with normalized input vectors or \\
+$\bar{w}^{new} \approx [-0.1986, -0.3822, 0.0276, 2]$ with non normalized input vectors. \\
+These results where found using the Jupyter Notebook called \textit{ex1-5.ipynb}. \\
+\textbf{Obviously WRONG since gradient and MSE were not correct.}
+\item Gradient descent: compute the gradient of the input with regard to the weights at each step of the network.\\
+Back propagation: updates the weights and the biases at each layer of the network. \\
+\textit{\textbf{WRONG:} The gradient descent updates the weights and biases and the back propagation computes the gradient of the input WRT the weights.}
+\end{enumerate}
+
+
+\section{Simple Machine Learning Framework  \punkte{45}}
+\label{sec:2}
+I implemented most of the framework but the weight updates seems wrong because the weights only change a little bit in the beginning and then remain constant. \\
+The gradient may also not be correct because I was unable to implement the \textit{check\_gradient} function correctly.
+
+
+\section{Handwritten Digit Recognition  \punkte{35}}
+Unfortunately, I could not even start this exercise since Section \ref{sec:2} was not finished.
+
+\end{document}
